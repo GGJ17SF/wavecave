@@ -8,13 +8,14 @@ public class fpcontrol : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		head = Camera.main.GetComponent<StereoController>().Head;
+		//head = Camera.main.GetComponent<StereoController>().Head;
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (head == null) {
+			//unity sucks
 			head = Camera.main.GetComponent<StereoController> ().Head;
 		}
 		transform.position += speed * head.Gaze.direction;
