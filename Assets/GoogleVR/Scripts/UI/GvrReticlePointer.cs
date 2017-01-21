@@ -19,6 +19,7 @@ using UnityEngine;
 [AddComponentMenu("GoogleVR/UI/GvrReticlePointer")]
 [RequireComponent(typeof(Renderer))]
 public class GvrReticlePointer : GvrBasePointer {
+	public playerController player;
   /// Number of segments making the reticle circle.
   public int reticleSegments = 20;
 
@@ -105,11 +106,20 @@ public class GvrReticlePointer : GvrBasePointer {
 
   /// Called when a trigger event is initiated. This is practically when
   /// the user begins pressing the trigger.
-  public override void OnPointerClickDown() {}
+  public override void OnPointerClickDown() {
+		if (player != null) {
+			player.moving = true;
+		}
+	}
 
   /// Called when a trigger event is finished. This is practically when
   /// the user releases the trigger.
-  public override void OnPointerClickUp() {}
+  public override void OnPointerClickUp() {
+
+		if (player != null) {
+			player.moving = false;
+		}
+	}
 
   public override float GetMaxPointerDistance() {
     return kReticleDistanceMax;

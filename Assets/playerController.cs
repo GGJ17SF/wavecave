@@ -8,12 +8,14 @@ public class playerController : MonoBehaviour {
 	public float speed;
 	public GvrHead head;
 	private Rigidbody rb;
+	public bool moving;
 
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>(); 
 		rb.position = transform.position;
+		//moving = false;
 	}
 	
 	// Update is called once per frame
@@ -22,6 +24,8 @@ public class playerController : MonoBehaviour {
 			//unity sucks
 			head = Camera.main.GetComponent<StereoController> ().Head;
 		}
-		rb.position += speed * head.Gaze.direction;
+		if (moving) {
+			rb.position += speed * head.Gaze.direction;
+		}
 	}
 }

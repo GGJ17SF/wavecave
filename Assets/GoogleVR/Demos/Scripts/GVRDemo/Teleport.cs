@@ -17,10 +17,11 @@ using System.Collections;
 
 [RequireComponent(typeof(Collider))]
 public class Teleport : MonoBehaviour, IGvrGazeResponder {
-  private Vector3 startingPosition;
+  	private Vector3 startingPosition;
 
-  public Material inactiveMaterial;
-  public Material gazedAtMaterial;
+  	public Material inactiveMaterial;
+  	public Material gazedAtMaterial;
+	public RoomMaterialController room;
 
   void Start() {
     startingPosition = transform.localPosition;
@@ -36,9 +37,18 @@ public class Teleport : MonoBehaviour, IGvrGazeResponder {
 
   public void SetGazedAt(bool gazedAt) {
     if (inactiveMaterial != null && gazedAtMaterial != null) {
-      GetComponent<Renderer>().material = gazedAt ? gazedAtMaterial : inactiveMaterial;
-      return;
+      	GetComponent<Renderer>().material = gazedAt ? gazedAtMaterial : inactiveMaterial;
+			if (room != null) {
+				Debug.Log ("to setGazedAt: " + gazedAt);
+				room.SetGazedAt (gazedAt);
+			}
+			if (room == null) {
+				Debug.Log ("room null");
+			}
+
+		return;
     }
+	
     GetComponent<Renderer>().material.color = gazedAt ? Color.green : Color.red;
   }
 
