@@ -8,17 +8,16 @@ public class playerController : MonoBehaviour {
 	public float speed;
 	public GvrHead head;
 	public bool moving;
-	public levelcontroller levelBuilder;
+
 
 	private Rigidbody rb;
-	private int levelcounter;
+
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>(); 
 		rb.position = transform.position;
 		//moving = false;
-		levelcounter = 1;
 	}
 	
 	// Update is called once per frame
@@ -37,9 +36,7 @@ public class playerController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		levelcounter += 1;
-		levelBuilder.SetLevel (levelcounter);
-		Debug.Log ("next level!");
+		other.gameObject.GetComponent<nextLevelController> ().GoNextLevel ();		
 	}
 
 }

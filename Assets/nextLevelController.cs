@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class nextLevelController : MonoBehaviour {
-	public levelcontroller levelBuilder;
-	public int nextLevel;
+	public GameObject NextLevel;
+	public levelcontroller LevelBuilder;
 	// Use this for initialization
 	void Start () {
 		
@@ -14,11 +14,8 @@ public class nextLevelController : MonoBehaviour {
 	void Update () {
 		
 	}
-
-	void onCollisionEnter (Collision col) {
-		if (levelBuilder != null) {
-			levelBuilder.SetLevel (nextLevel);
-
-		}
+	public void GoNextLevel(){
+		LevelBuilder.Next (NextLevel);
 	}
+
 }
