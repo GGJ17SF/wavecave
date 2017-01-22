@@ -38,8 +38,7 @@ public class Teleport : MonoBehaviour, IGvrGazeResponder {
   public void SetGazedAt(bool gazedAt) {
     if (inactiveMaterial != null && gazedAtMaterial != null) {
       	GetComponent<Renderer>().material = gazedAt ? gazedAtMaterial : inactiveMaterial;
-			if (room != null) {
-				Debug.Log ("to setGazedAt: " + gazedAt);
+			if (room != null) {				
 				room.SetGazedAt (gazedAt);
 			}
 			if (room == null) {
@@ -68,7 +67,7 @@ public class Teleport : MonoBehaviour, IGvrGazeResponder {
   /// Called when the user is looking on a GameObject with this script,
   /// as long as it is set to an appropriate layer (see GvrGaze).
   public void OnGazeEnter() {
-		Handheld.Vibrate();
+	//	Handheld.Vibrate();
     SetGazedAt(true);
   }
 
@@ -80,7 +79,7 @@ public class Teleport : MonoBehaviour, IGvrGazeResponder {
 
   /// Called when the viewer's trigger is used, between OnGazeEnter and OnPointerExit.
   public void OnGazeTrigger() {
-    TeleportRandomly();
+    //TeleportRandomly();
   }
 
   #endregion

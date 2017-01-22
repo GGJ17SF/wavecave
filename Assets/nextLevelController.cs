@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class nextLevelController : MonoBehaviour {
-	public GameObject NextLevel;
+	public level NextLevel;
 	public levelcontroller LevelBuilder;
 	// Use this for initialization
 	void Start () {

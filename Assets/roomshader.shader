@@ -3,9 +3,12 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Tilingx ("Tiling", Float) = 1.0
-        _Tilingy ("Tiling", Float) = 1.0
-        _Tilingz ("Tiling", Float) = 1.0
+        _Tilingx ("Tilingx", Float) = 1.0
+        _Tilingy ("Tilingy", Float) = 1.0
+        _Tilingz ("Tilingz", Float) = 1.0
+
+        _Distance ("Distance", Float) = 1.0
+
 
         _OcclusionMap("Occlusion", 2D) = "white" {}
     }
@@ -34,7 +37,7 @@
                 v2f o;
 
                 o.pos = UnityObjectToClipPos(pos);
-                o.coords = float3(pos.xyz.x * _Tilingx, pos.xyz.y * _Tilingy, pos.xyz.z * _Tilingz);
+                o.coords = float3(pos.xyz.x / pos.xyz.z * pos.xyz.y * (1.0 - _Tilingx), pos.xyz.y * pos.xyz.z / _Tilingy, pos.xyz.z / pos.xyz.y / sin(_Tilingz));
                 o.objNormal = normal;
                 o.uv = uv;
                 return o;
@@ -42,6 +45,7 @@
 
             sampler2D _MainTex;
             sampler2D _OcclusionMap;
+            float _Distance;
             
             fixed4 frag (v2f i) : SV_Target
             {
@@ -54,8 +58,12 @@
                 fixed4 cy = tex2D(_MainTex, i.coords.xz);
                 fixed4 cz = tex2D(_MainTex, i.coords.xy);
                 // blend the textures based on weights
-                fixed4 c = cx * blend.x + cy * blend.y + cz * blend.z;
+                fixed4 c = cx * blend.x * _Distance + cy * blend.y + cz * blend.z;
                 // modulate by regular occlusion map
+                fixed4 dx = tex2D(_OcclusionMap, i.coords.yz);
+                fixed4 dy = tex2D(_OcclusionMap, i.coords.xz);
+                fixed4 dz = tex2D(_OcclusionMap, i.coords.xy);
+                fixed4 d = dx * blend.x * _Distance + dy * blend.y * _Distance + dz * blend.z * _Distance;
                 c *= tex2D(_OcclusionMap, i.uv);
                 return c;
             }

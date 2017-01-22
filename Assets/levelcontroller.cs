@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class levelcontroller : MonoBehaviour {
 	private int currentLevel;
-	public GameObject StartLevel;
+	public level StartLevel;
 
 	// Use this for initialization
 	void Start () {
+		//StartLevel.BeginLevel ();
 	}
 	
 	// Update is called once per frame
@@ -15,10 +16,15 @@ public class levelcontroller : MonoBehaviour {
 		
 	}
 
-	public void Next(GameObject level){
+	public void Next(level theLevel){
 		Debug.Log ("loading level");
-		StartLevel.SetActive (false);
-		level.SetActive (true);
-		StartLevel = level;
+		//StartLevel.SetActive (false);
+		StartLevel.EndLevel();
+
+		if (theLevel != null) {
+			theLevel.BeginLevel ();		
+		}
+
+		StartLevel = theLevel;
 	}
 }
