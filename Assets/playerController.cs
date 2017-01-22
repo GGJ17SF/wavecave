@@ -27,5 +27,9 @@ public class playerController : MonoBehaviour {
 		if (moving) {
 			rb.position += speed * head.Gaze.direction;
 		}
+
+	}
+	void OnCollisionEnter(Collision col){
+		moving = false;
 	}
 }
