@@ -37,7 +37,7 @@
                 v2f o;
 
                 o.pos = UnityObjectToClipPos(pos);
-                o.coords = float3(pos.xyz.x / pos.xyz.z * pos.xyz.y * (1.0 - _Tilingx), pos.xyz.y * pos.xyz.z / _Tilingy, pos.xyz.z / pos.xyz.y / sin(_Tilingz));
+                o.coords = float3(pos.xyz.x / pos.xyz.z * pos.xyz.y * (1.0 - _Tilingx), pos.xyz.y * pos.xyz.z / _Tilingy,  pos.xyz.z / pos.xyz.y / sin(_Tilingz));
                 o.objNormal = normal;
                 o.uv = uv;
                 return o;
