@@ -40,7 +40,7 @@ public class Teleport : MonoBehaviour, IGvrGazeResponder {
       	GetComponent<Renderer>().material = gazedAt ? gazedAtMaterial : inactiveMaterial;
 			if (room != null) {
 				Debug.Log ("to setGazedAt: " + gazedAt);
-				room.SetGazedAt (gazedAt);
+				//room.SetGazedAt (gazedAt);
 			}
 			if (room == null) {
 				Debug.Log ("room null");
