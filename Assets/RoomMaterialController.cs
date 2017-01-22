@@ -7,7 +7,7 @@ public class RoomMaterialController : MonoBehaviour {
 	public Material inactiveMaterial;
 	public Material gazedAtMaterial;
 	public Renderer rend;
-
+	public playerController player;
 	// Use this for initialization
 	void Start () {
 		rend = GetComponent<Renderer>();
@@ -27,10 +27,11 @@ public class RoomMaterialController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		float n = player.targetDistance;
 		float xsize = Mathf.PingPong(Time.time, 1.0F);
 		rend.material.SetFloat("_Tilingx", xsize * 0.3F);
-		float ysize = Mathf.PingPong(Time.time, 1.2F);
-		rend.material.SetFloat("_Tilingy", ysize * 3F);
+		float ysize = Mathf.PingPong(Time.time, 1.2F) + 0.5f;
+		rend.material.SetFloat("_Tilingy", ysize * n);
 		float zsize = Mathf.PingPong(Time.time, 1.1F);
 		rend.material.SetFloat("_Tilingz", zsize * 0.3F);
 	}

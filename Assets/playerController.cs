@@ -8,7 +8,8 @@ public class playerController : MonoBehaviour {
 	public float speed;
 	public GvrHead head;
 	public bool moving;
-
+	public GameObject targetForSound;
+	public float targetDistance;
 
 	private Rigidbody rb;
 
@@ -30,6 +31,9 @@ public class playerController : MonoBehaviour {
 			rb.position += speed * head.Gaze.direction;
 		}
 
+		if (targetForSound != null) {
+			targetDistance = Vector3.Distance (gameObject.transform.position, targetForSound.transform.position);
+		}
 	}
 	void OnCollisionEnter(Collision col){
 		moving = false;
